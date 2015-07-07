@@ -1,4 +1,7 @@
 # FindProgram.py
+"""
+    Here some documentation comes. This is test for bestfork
+"""
 #
 # Copyright (C) 2007 Carlos Garcia Campos <carlosgc@gsyc.escet.urjc.es>
 #
@@ -17,8 +20,7 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 import os
-
-from stat import *
+import os.stat
 
 
 def find_program(program):
@@ -26,6 +28,9 @@ def find_program(program):
     Returns an absolute path if program was found or None'''
 
     def __path_is_executable(path):
+        '''Looks for given program in current path.
+        Returns an absolute path if program was found or None'''
+
         return os.stat(path)[ST_MODE] & S_IEXEC
 
     # Do not look in PATH if it's already an absolute path
@@ -44,8 +49,8 @@ def find_program(program):
         # FIXME: it only works on UNIX
         path = "/bin:/usr/bin:."
 
-    for p in path.split(os.pathsep):
-        absolute = os.path.join(p, program)
+    for partial_path in path.split(os.pathsep):
+        absolute = os.path.join(partial_path, program)
         if os.path.exists(absolute) and \
                 __path_is_executable(absolute) and \
                 not os.path.isdir(absolute):
@@ -55,6 +60,9 @@ def find_program(program):
 
 
 if __name__ == '__main__':
+    """
+    Here some documentation comes. This is test for bestfork
+    """   
     import sys
 
     ## Absolute path
